@@ -2,11 +2,11 @@
 DATABASE = SQLite3::Database.new("water_safety.db")
 
 # Make the tables
-DATABASE.execute("CREATE TABLE IF NOT EXISTS beers (id INTEGER PRIMARY KEY, name TEXT UNIQUE, abv INTEGER, beer_type_id INTEGER, brewery_id INTEGER, avg_rating INTEGER);")
-DATABASE.execute("CREATE TABLE IF NOT EXISTS breweries (id INTEGER PRIMARY KEY, name TEXT UNIQUE);")
-DATABASE.execute("CREATE TABLE IF NOT EXISTS beer_types (id INTEGER PRIMARY KEY, name TEXT UNIQUE);")
-DATABASE.execute("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT UNIQUE);")
-DATABASE.execute("CREATE TABLE IF NOT EXISTS ratings (id INTEGER PRIMARY KEY, user_id INTEGER, beer_id INTEGER, rating INTEGER);")
+DATABASE.execute("CREATE TABLE IF NOT EXISTS reports (id INTEGER PRIMARY KEY, location TEXT, surroundings TEXT, plant_treatment TEXT, comments TEXT, source_id INTEGER, group_id INTEGER);")
+DATABASE.execute("CREATE TABLE IF NOT EXISTS sources (id INTEGER PRIMARY KEY, name TEXT UNIQUE);")
+DATABASE.execute("CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, name TEXT);")
+DATABASE.execute("CREATE TABLE IF NOT EXISTS pollutants (id INTEGER PRIMARY KEY, name TEXT UNIQUE);")
+DATABASE.execute("CREATE TABLE IF NOT EXISTS pollutants_reports (report_id INTEGER, pollutant_id INTEGER);")
 
 # Return results as an Array of Hashes.
 DATABASE.results_as_hash = true
