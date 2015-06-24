@@ -26,6 +26,7 @@ The pollutant_reports has a many to many relationship; it forms a bridge between
 * View all data in the reports table, pollutants table, sources, or groups table
 * Search all reports by their source
 * Search all reports by a group
+* Search all reports by their pollutants
 
 ##Shouldn't Cases
 * Add a report without filling all of the fields in
