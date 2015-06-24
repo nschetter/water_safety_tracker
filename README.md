@@ -19,10 +19,10 @@ The tables included with the application are:
 The pollutant_reports has a many to many relationship; it forms a bridge between the pollutants and reports tables.
 
 ##Should Cases
-* Add, remove, edit, or delete reports
-* Add, remove, edit, or delete pollutants
-* Add, remove, edit, or delete groups
-* Add, remove, edit, or delete sources
+* Add, edit, or delete reports
+* Add, edit, or delete pollutants
+* Add, edit, or delete groups
+* Add, edit, or delete sources
 * View all data in the reports table, pollutants table, sources, or groups table
 * Search all reports by their source
 * Search all reports by a group
