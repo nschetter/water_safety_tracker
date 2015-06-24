@@ -4,7 +4,7 @@ The objective of this application is to track the safety of local drinking water
 
 A group or class may use this application to report their findings in a local water source. They will report their particular location, then describe the surroundings of the water source. This description will state if there is a foundry, plant, or some type of pollution nearby. It can also state if the area appears to be pollutant-free. Then, the group will include a suggestion of a water treatment plant to treat the water. Additional comments may be included by the group or class in a particular report. The goal is to assess the water supplies globally as more data enters the database.
 
-For example: Mr. Smith's class decides to take his 3rd grade class to the Maumee River 
+For example: Mr. Smith's class decides to take his 3rd grade class to the Maumee River to test the water's safety. They will note their location, what the surroundings of the water source look like, identify the pollutant in the water, possibly get a recommendation from a water treatment plant of how to treat the water, and even add comments. All of the report may be edited at a later time or deleted altogether. If a source, group, or pollutant isn't in the database, they can added into it. 
 
 ##Description
 
