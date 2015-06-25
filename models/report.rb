@@ -1,6 +1,51 @@
+require_relative '/database_class_methods.rb'
+require_relative '/database_instance_methods.rb'
+
+
 class Report
-  def initialize()
-    
+  extend DatabaseClassMethods
+  include DatabaseInstanceMethods
+  
+  attr_accessor :id, :location, :surroundings, :plant_treatment, :comments, :source_id, :group_id
+  
+  def initialize(arg = {})
+    @id = arg["id"]
+    @location = arg["location"]
+    @surroundings = arg["surroundings"]
+    @plant_treatment = arg["plant_treatment"]
+    @comments = arg["comments"]
+    #@source_id = arg["source_id"]
+    #@group_id = arg["group_id"]  
   end #end initialize
+  
+  # This class method allows us to list all of the reports associated with the group.
+  # 
+  # This accepts one argument--the id of the group we want to look up
+  # 
+  # Returns an Array of Group class Objects that belong to the group
+  def self.reports_in_group(id)
+    reportlist = DATABASE.execute("SELECT * FROM reports WHERE group_id = #{id};")
+    group_array = []
+    reportlist.each do |group|
+      group_array << Group.new(group)
+    end
+
+    group_array
+  end
+  
+  # This class method allows us to list all of the reports associated with the source
+  #
+  # It accepts the id of the source we want to look up
+  # 
+  # Returns an Array of Source class Objects that belong to the source
+  def self.reports_in_source(id)
+    reportlist = DATABASE.execute("SELECT * FROM reports WHERE source_id = #{id};")
+    source_array = []
+    reportlist.each do |source|
+      source_array << Source.new(source)
+    end
+
+    source_array
+  end
   
 end #end class

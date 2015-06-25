@@ -24,7 +24,7 @@ module DatabaseClassMethods
     columns_array = arg.keys
     values_array = arg.values  
     columns_for_sql = columns_array.join(", ")
-   sql_vals = []
+    sql_vals = []
     
     values_array.each do |item|
       if item.is_a?(String)
@@ -34,11 +34,22 @@ module DatabaseClassMethods
       end
     end
     
-    new_sql_val =sql_vals.join(", ")
+    new_sql_val = sql_vals.join(", ")
     DATABASE.execute("INSERT INTO #{table_name} (#{columns_for_sql}) VALUES (#{new_sql_val});")
     arguments["id"] = DATABASE.last_insert_row_id
     self.new(arg)
   end
+ 
+  # Get a single row.
+  #
+  # Returns an Array containing the Hash of the row.
+  def find(id)    
+    # Figure out the table's name from the class we're calling the method on.
+    table_name = self.to_s.pluralize.underscore
+    results = DATABASE.execute("SELECT * FROM #{table_name} WHERE id = #{id}").first
+    self.new(results)
+  end
+ 
   # Deletes a row from the table by the class that called it.
   # 
   # Accepts the id number of the row to delete in the table that called it
