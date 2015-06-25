@@ -11,6 +11,7 @@ end
 # This pulls from the report main page, and sends the user to the report_add page.
 # This page allows the user to add a new report name
 get '/report_add' do
-  Report.add("first_name" => params["first_name"], "last_name" => params["last_name"], "nickname" => params["nickname"])
+  Report.add("location" => params["location"], "surroundings" => params["surroundings"], "plant_treatment" => params["plant_treatment"], "comments" => params["comments"], "source_id" => params["source_id"], "group_id" => params["group_id"])
   erb :"/success/data_added"
 end
+
