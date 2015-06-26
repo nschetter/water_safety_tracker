@@ -5,26 +5,21 @@ end
 
 # form for user to enter information to add report
 get "/report_add_form" do
-  erb :"/report_add_form"
+  erb :"/reports/report_add_form"
 end
 
 # This pulls from the report main page, and sends the user to the report_add page.
 # This page allows the user to add a new report name
 get '/report_add' do
   # new_report_id is the Integer returned from the add method
-   new_report_id = Report.add({"location" => params["location"], "surroundings" => params["surroundings"], "plant_treatment" => params["plant_treatment"], "comments" => params["comments"], "source_id" => params["source_id"], "group_id" => params["group_id"]})
-  
-   if new_report_id
-     @new_report = report.find_as_object(new_report_id)
-   else
-     @error = true
-     erb :"reports/add_report_form"
-   end
+  @new_report_id = Report.add_to_database(params)
   erb :"/success/data_added"
 end
 
 get '/report_list' do
-  DATABASE.execute('SELECT * FROM reports;')
+  @report_list = DATABASE.execute('SELECT * FROM reports')
+  binding.pry  
+  erb :"/reports/report_list"
 end
 
 get "/report_by_group_form" do

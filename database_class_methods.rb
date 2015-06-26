@@ -23,13 +23,14 @@ module DatabaseClassMethods
       if value.is_a?(String)
         individual_values_for_sql << "'#{value}'"
       else
-        individual_values_for_sql << value
+        individual_values_for_sql << "#{value}"
       end
     end
     values_for_sql = individual_values_for_sql.join(", ") 
 
     DATABASE.execute("INSERT INTO #{table_name} (#{column_names_for_sql}) VALUES (#{values_for_sql});")
-    DATABASE.last_insert_row_id
+    options["id"] = DATABASE.last_insert_row_id
+    self.new(options)
   end
   
   
