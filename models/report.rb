@@ -1,7 +1,3 @@
-# require_relative '/database_class_methods.rb'
-# require_relative '/database_instance_methods.rb'
-
-
 class Report
   extend DatabaseClassMethods
   include DatabaseInstanceMethods
@@ -14,9 +10,13 @@ class Report
     @surroundings = arg["surroundings"]
     @plant_treatment = arg["plant_treatment"]
     @comments = arg["comments"]
-    #@source_id = arg["source_id"]
-    #@group_id = arg["group_id"]  
+    @source_id = arg["source_id"]
+    @group_id = arg["group_id"]  
   end #end initialize
+  
+  def add(options={})
+    self.add_to_database(options)
+  end
   
   # This class method allows us to list all of the reports associated with the group.
   # 

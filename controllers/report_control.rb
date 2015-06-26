@@ -11,13 +11,16 @@ end
 # This pulls from the report main page, and sends the user to the report_add page.
 # This page allows the user to add a new report name
 get '/report_add' do
-  if Report.valid?(params["location"], params["surroundings"], params["plant_treatment"], params["comments"], params["source_id"], params["group_id"])
-    @error = true
-    erb :"report_add_form"
-  else
-    @report.add_to_database
-    erb :"/success/data_added"
-  end
+  # new_report_id is the Integer returned from the add method
+   new_report_id = Report.add({"location" => params["location"], "surroundings" => params["surroundings"], "plant_treatment" => params["plant_treatment"], "comments" => params["comments"], "source_id" => params["source_id"], "group_id" => params["group_id"]})
+  
+   if new_report_id
+     @new_report = report.find_as_object(new_report_id)
+   else
+     @error = true
+     erb :"reports/add_report_form"
+   end
+  erb :"/success/data_added"
 end
 
 get '/report_list' do
