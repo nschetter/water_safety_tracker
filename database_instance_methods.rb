@@ -24,6 +24,7 @@ module DatabaseInstanceMethods
     else
       inst_var << "#{key} = #{value}"
     end
+    end
   end
     
   # Deletes an entry from the database.

@@ -4,6 +4,8 @@ require 'sinatra/reloader'
 
 require 'sqlite3'
 require_relative 'database_setup'
+require_relative 'database_class_methods'
+require_relative 'database_instance_methods'
 
 require_relative 'models/report.rb'
 # require_relative 'models/source.rb'

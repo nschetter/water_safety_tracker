@@ -6,7 +6,7 @@ module DatabaseClassMethods
   # 
   # Returns an Array of Objects of that Class.
   def all
-    t_name = self.to_s.tableize
+    table_name = self.to_s.tableize
     instance = DATABASE.execute("SELECT * FROM #{table_name};")
     array_list = []
 

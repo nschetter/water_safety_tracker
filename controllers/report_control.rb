@@ -5,13 +5,48 @@ end
 
 # form for user to enter information to add report
 get "/report_add_form" do
-  erb :"/reports/report_add_form"
+  erb :"/report_add_form"
 end
 
 # This pulls from the report main page, and sends the user to the report_add page.
 # This page allows the user to add a new report name
 get '/report_add' do
-  Report.add("location" => params["location"], "surroundings" => params["surroundings"], "plant_treatment" => params["plant_treatment"], "comments" => params["comments"], "source_id" => params["source_id"], "group_id" => params["group_id"])
-  erb :"/success/data_added"
+  if Report.valid?(params["location"], params["surroundings"], params["plant_treatment"], params["comments"], params["source_id"], params["group_id"])
+    @error = true
+    erb :"report_add_form"
+  else
+    @report.add_to_database
+    erb :"/success/data_added"
+  end
 end
 
+get '/report_list' do
+  DATABASE.execute('SELECT * FROM reports;')
+end
+
+get "/report_by_group_form" do
+  @allgroups = DATABASE.execute("SELECT * FROM groups")
+  erb :"/report_by_group"
+end
+
+get "/report_by_group" do
+  
+end
+
+get "/report_by_pollutants_form" do
+  @allpollutants = DATABASE.execute("SELECT * FROM pollutants")
+  erb :"/report_by_pollutants"
+end
+
+get "/report_by_pollutants" do
+  
+end
+
+get "/report_by_source_form" do
+  @allsources = DATABASE.execute("SELECT * FROM sources")
+  erb :"/report_by_source"
+end
+
+get "/report_by_source" do
+
+end

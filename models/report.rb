@@ -1,5 +1,5 @@
-require_relative '/database_class_methods.rb'
-require_relative '/database_instance_methods.rb'
+# require_relative '/database_class_methods.rb'
+# require_relative '/database_instance_methods.rb'
 
 
 class Report
@@ -46,6 +46,17 @@ class Report
     end
 
     source_array
+  end
+  
+  # Checks to see if all fields are filled in
+  #
+  # If all fields are not filled in, then returns true
+  def self.valid?(location, surroundings, plant_treatment, comments, source_id, group_id)
+    if location.empty? || surroundings.empty? || plant_treatment.empty? || comments.empty? || source_id.empty? || group_id.empty?
+      true
+    else
+      false
+    end
   end
   
 end #end class
