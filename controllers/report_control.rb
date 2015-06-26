@@ -1,5 +1,5 @@
 # This pulls from the main page, and sends the user to the report_main page.
-get '/' do
+get '/report_main' do
   erb :'reports/report_main'
 end
 

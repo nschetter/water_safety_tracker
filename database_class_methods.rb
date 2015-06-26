@@ -1,63 +1,69 @@
-require 'active_support'
-require 'active_support/inflector'
+require "active_support"
+require "active_support/inflector"
 
-module DatabaseClassMethods
-  # Retrieves all rows of the table of the Class that calls the method
-  # 
-  # Returns an Array of Objects of that Class.
-  def all
-    table_name = self.to_s.tableize
-    instance = DATABASE.execute("SELECT * FROM #{table_name};")
-    array_list = []
+# This module will be extended in all classes. It contains methods
+# that will become class methods for the class.
 
-    instance.each do |hash|
-      array_list << self.new(hash)
-    end
-
-    array_list
-  end
-  # Creates a new row in the Class table and returns an Object
-  # 
-  # Returns an Object of the Class calling the method, and also adds the new row
-  def add(arg={})
-    t_name = self.to_s.tableize
-    columns_array = arg.keys
-    values_array = arg.values  
-    columns_for_sql = columns_array.join(", ")
-    sql_vals = []
+module DatabaseClassMethods  
+  
+  # Adds a new record to the database.
+  #
+  #
+  # Return an Integer of ID of inserted row.
+  def add_to_database(options={})
+    table_name = self.to_s.pluralize.underscore
     
-    values_array.each do |item|
-      if item.is_a?(String)
-       sql_vals << "'#{item}'"
+    column_names = options.keys
+    column_names_for_sql = column_names.join(", ")
+    
+    values = options.values
+    individual_values_for_sql = []
+    
+    values.each do |value|
+      if value.is_a?(String)
+        individual_values_for_sql << "'#{value}'"
       else
-       sql_vals << item
+        individual_values_for_sql << value
       end
     end
-    
-    new_sql_val = sql_vals.join(", ")
-    DATABASE.execute("INSERT INTO #{table_name} (#{columns_for_sql}) VALUES (#{new_sql_val});")
-    arguments["id"] = DATABASE.last_insert_row_id
-    self.new(arg)
+    values_for_sql = individual_values_for_sql.join(", ") 
+
+    DATABASE.execute("INSERT INTO #{table_name} (#{column_names_for_sql}) VALUES (#{values_for_sql});")
+    DATABASE.last_insert_row_id
   end
- 
+  
+  
   # Get a single row.
   #
+  # id - The ID.
+  #
   # Returns an Array containing the Hash of the row.
-  def find(id)    
+  def find(record_id)    
     # Figure out the table's name from the class we're calling the method on.
     table_name = self.to_s.pluralize.underscore
     results = DATABASE.execute("SELECT * FROM #{table_name} WHERE id = #{id}").first
     self.new(results)
   end
- 
-  # Deletes a row from the table by the class that called it.
-  # 
-  # Accepts the id number of the row to delete in the table that called it
-  # 
-  # Deletes the row from the table
-  def delete(deletion_id)
-    table_name = self.to_s.tableize
+  
+  
+  
+  # Get all of the rows for a table.
+  #
+  # Returns an Array containing objects for each row.
+  def all
+    # Figure out the table's name from the class we're calling the method on.
+    table_name = self.to_s.pluralize.underscore
     
-    DATABASE.execute("DELETE FROM #{table_name} WHERE id = #{deletion_id};")
+    results = DATABASE.execute("SELECT * FROM #{table_name}")
+
+    results_as_objects = []
+    
+    results.each do |result_hash|
+      results_as_objects << self.new(result_hash)
+    end
+    
+    return results_as_objects
   end
+  
+  
 end
