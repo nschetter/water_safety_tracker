@@ -1,6 +1,11 @@
 <% @report_list. each do |report|%>
 <p>
-  <%= report.location%>
+ Location: <%= report["location"]%>
+ Surroundings: <%= report["surroundings"]%>
+ Suggested Plant Treatment: <%= report["plant_treatment"]%>
+ Comments: <%= report["comments"]%>
+ Source_ID: <%= report["source_id"]%>
+ Group_ID: <%= report["group_id"]%>
 </p>
 <% end%>
 

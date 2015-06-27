@@ -16,35 +16,43 @@ get '/report_add' do
   erb :"/success/data_added"
 end
 
+get '/report_change' do
+  erb :"/reports/report_change"
+end
+
 get '/report_list' do
-  @report_list = DATABASE.execute('SELECT * FROM reports')
-  binding.pry  
+  @report_list = DATABASE.execute('SELECT * FROM reports') 
   erb :"/reports/report_list"
 end
 
-get "/report_by_group_form" do
-  @allgroups = DATABASE.execute("SELECT * FROM groups")
-  erb :"/report_by_group"
-end
-
-get "/report_by_group" do
-  
-end
-
-get "/report_by_pollutants_form" do
-  @allpollutants = DATABASE.execute("SELECT * FROM pollutants")
-  erb :"/report_by_pollutants"
-end
-
-get "/report_by_pollutants" do
-  
-end
-
-get "/report_by_source_form" do
-  @allsources = DATABASE.execute("SELECT * FROM sources")
-  erb :"/report_by_source"
-end
-
-get "/report_by_source" do
-
-end
+# These won't function without other models
+#
+# get "/report_by_group_form" do
+#   @allgroups = DATABASE.execute("SELECT * FROM groups")
+#   erb :"/reports/report_by_group_form"
+# end
+#
+# get "/report_by_group" do
+#   @group = Group.find(params["name"]["id"])
+#   erb :"report_by_group"
+# end
+#
+# get "/report_by_pollutants_form" do
+#   @allpollutants = DATABASE.execute("SELECT * FROM pollutants")
+#   erb :"/reports/report_by_pollutants_form"
+# end
+#
+# get "/report_by_pollutants" do
+#   @pollutant = Pollutant.find(params["name"]["id"])
+#   erb :"report_by_pollutants"
+# end
+#
+# get "/report_by_source_form" do
+#   @allsources = DATABASE.execute("SELECT * FROM sources")
+#   erb :"/reports/report_by_source_form"
+# end
+#
+# get "/report_by_source" do
+#   @source = Source.find(params["name"]["id"])
+#   erb :"report_by_source"
+# end

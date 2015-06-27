@@ -1,5 +1,17 @@
-<% @allpollutants.each do |pollutant| %>
-<p> <%= pollutant.name %></p>
-<% end %>
-      
+<h1> Reports by Pollutants </h1>
+
+<h3> Which pollutant would you like to see the reports of?</h3>
+<!-- Need to have a Pollutant model for this -->
+<!-- <hr>
+<form action= "/report_by_pollutants">
+  <select name="pollutant[id]">
+    <% Pollutant.all.each do |pollutant| %>
+      <option value="<%= pollutant"[id]"%>" "<%= pollutant["name"] %>" </option>
+    <% end %>
+  </select>
+
+  <button type="submit">List this Group's Reports</button>
+
+</form> -->
+
 <a href="/home/home">Return to main menu?</a>

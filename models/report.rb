@@ -12,7 +12,6 @@ class Report
     @comments = arg["comments"]
     @source_id = arg["source_id"]
     @group_id = arg["group_id"]  
-    @allgroups = allgroups
   end #end initialize
   
   def add(options={})

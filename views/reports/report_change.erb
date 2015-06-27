@@ -1,0 +1,20 @@
+<h1> Update A Report </h1>
+
+<form action ="/reports/report_save">
+  
+  <p>
+  Location:<input type="text" placeholder="" name="location" value="<%= params["location"] %>">
+  
+  Surroundings:<input type="text" placeholder="" name="surroundings" value="<%= params["surroundings"] %>">
+
+  Treatment Suggestion:<input type="text" placeholder="" name="plant_treatment" value="<%= params["plant_treatment"] %>">
+
+  Comments:<input type="text" placeholder="" name="comments" value="<%= params["comments"] %>">
+
+  Source ID:<input type="number" placeholder="" name="source_id" value="<%= params["source_id"] %>">
+
+  Group ID:<input type="number" placeholder="" name="group_id" value="<%= params["group_id"] %>">   
+  
+  <input type="submit" value="update">
+  </p>  
+</form>

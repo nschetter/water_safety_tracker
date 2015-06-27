@@ -1,5 +1,16 @@
-<% @allsources.each do |source| %>
-<p> <%= source.name %></p>
-<% end %>
-      
+<h1> Reports by Source </h1>
+
+<h3> Which source would you like to see the reports of?</h3>
+<hr>
+
+<form action= "/report_by_source">
+  <select name="source[id]">
+    <% Source.all.each do |source| %>
+      <option value="<%= source"[id]"%>"><%= source["name"] %></option>
+    <% end %>
+  </select>
+
+  <button type="submit">List this Source's Reports</button>
+
 <a href="/home/home">Return to main menu?</a>
+
